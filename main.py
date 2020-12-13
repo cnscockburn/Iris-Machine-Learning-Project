@@ -59,6 +59,15 @@ def main():
         results.append(cv_results)
         names.append(name)
         print('%s: %f (%f)' % (name, cv_results.mean(), cv_results.std()))
+    pyplot.boxplot(results, labels=names)
+    pyplot.title('Algorithm Comparison')
+    pyplot.show()
+    model = SVC(gamma='auto')
+    model.fit(X_train, Y_train)
+    predictions = model.predict(X_validation)
+    print(accuracy_score(Y_validation, predictions))
+    print(confusion_matrix(Y_validation, predictions))
+    print(classification_report(Y_validation, predictions))
 
 
 if __name__ == '__main__':
